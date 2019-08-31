@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <style>
+      @page {
+       margin: 20px;
+       size: A4 landscape;
+        @bottom-center {
+          content: 'Page ' counter(page);
+        }
+      }
+      html, body {
+        font-size: 10px;
+        font-family: 'IBM Plex Sans', sans-serif;
+        color: #3E4345;
+      }
+      .container {
+        display: block;
+        min-height: 90vh;
+        padding: 1.5em 3em;
+      }
+      header {
+        display: block;
+        margin-bottom: 0.5em;
+      }
+      header img {
+        width: 8.9em;
+        height: 5.6em;
+        display: block;
+        margin-bottom: 0.7em;
+      }
+      header .page-title {
+        margin: auto;
+        font-family: 'Playfair Display', serif;
+        color: #3E4345;
+        text-transform: uppercase;
+        font-size: 26px;
+        margin-bottom: -3px;
+        margin-top: -32px;
+        text-align: center;
+      }
+      .logo .logo-title {
+        color: #2B3A8B;
+        font-weight: bold;
+        font-size: 12px;
+      }
+      footer {
+        text-align: center;
+      }
+      footer .page-number {
+        color: #919699;
+        font-style: normal;
+        font-weight: 500;
+        font-size: 12px;
+      }
+      main {
+        width: 100%;
+        height: 100%;
+      }
+      main .report-info {
+        margin: 3.3em 0;
+      }
+      table {
+        border-collapse: collapse;
+        width: 100%;
+      }
+      table, td {
+        border: 0.01em solid #5E6366;
+      }
+      td {
+        border-bottom: none;
+      }
+      th, td {
+        padding: 0.85em;
+        font-style: normal;
+        font-weight: normal;
+      }
+      th {
+        text-align: left;
+        color: #000000;
+        font-weight: bold;
+      }
+      td {
+        vertical-align: baseline;
+        word-wrap: break-word;
+      }
+      th, tr:last-child td {
+        border: 0.01em solid #5E6366;
+      }
+    </style>
+</head>
+<body>
+<div class="container">
+    <header>
+        <div class="logo">
+            <img src="./vinpearl-logo-01.png"/>
+            <span class="logo-title">PHU QUOC PARADISE RESORT &amp; VILLAS</span>
+        </div>
+        <div>
+            <h1 class="page-title">BIRTHDAY</h1>
+            <p class="report-date" style="background-color: white; text-align: right; padding: 0px; border: none;" th:text="'Report Date: ' + ${reportDateFormat}">
+                Report Date: 12:00 - 09/06/19</p>
+        </div>
+    </header>
+    <main>
+        <table class="report-info" cellspacing="0" cellpadding="0" style="border: none; background-color: white;"><tr>
+            <td class="filter-date" style="background-color: white; text-align: left; padding: 0px; border: none;" th:text="'Filter: ' + ${fromDateFormat}
+      + ' - ' + ${toDateFormat}">
+                Filter: 01/06/19 - 09/06/19
+            </td>
+        </tr></table>
+
+        <table>
+            <thead>
+            <tr>
+                <th style="text-align: right; width: 20px">No.</th>
+                <th style="width: 120px">Guest</th>
+                <th style="width: 30px">VIP</th>
+                <th style="width: 90px">Country</th>
+                <th style="width: 90px">Birthday</th>
+                <th style="width: 60px">Room</th>
+                <th style="width: 90px">R.Type</th>
+                <th style="width: 60px">Arrival</th>
+                <th style="width: 60px">Departure</th>
+                <th style="width: 90px">Travel Agent</th>
+                <th style="width: 60px">Status</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="report_info: ${reportInfo}">
+                <td style="text-align: right;" th:text="${report_infoStat.count}">1</td>
+                <td>Guest</td>
+                <td th:text="${report_info?.vipCode}">VIP</td>
+                <td th:text="${report_info?.country}">Country</td>
+                <td th:text="${report_info?.dob}">Birthday</td>
+                <td th:text="${report_info?.roomName}">Room</td>
+                <td th:text="${report_info?.roomType}">R.Type</td>
+                <td th:text="${report_info?.arrivalDateFormat}">Arrival</td>
+                <td th:text="${report_info?.departureDateFormat}">Departure</td>
+                <td th:text="${report_info?.travelAgentProfile?.firstName}">Travel Agent</td>
+                <td th:text="${report_info?.status}">Status</td>
+            </tr>
+            </tbody>
+        </table>
+    </main>
+</div>
+</body>
+</html>
