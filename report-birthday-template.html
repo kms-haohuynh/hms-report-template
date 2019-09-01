@@ -130,7 +130,7 @@
             <tbody>
             <tr th:each="report_info: ${reportInfo}">
                 <td th:text="${report_infoStat.count}">1</td>
-                <td th:if="${report_info.firstName}" th:text="${report_info.firstName}">Guest</td>
+                <td th:text="${report_info.firstName} ? __">Guest</td>
             </tr>
             </tbody>
         </table>
