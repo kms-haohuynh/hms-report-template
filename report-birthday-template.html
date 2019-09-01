@@ -129,8 +129,8 @@
             </thead>
             <tbody>
             <tr th:each="report_info: ${reportInfo}">
-                <td style="text-align: right;" th:text="${report_infoStat.count}">1</td>
-                <td>Guest</td>
+                <td th:text="${report_infoStat?.count}">1</td>
+                <td th:text="${report_info?.firstName}">Guest</td>
                 <td th:text="${report_info?.vipCode}">VIP</td>
                 <td th:text="${report_info?.country}">Country</td>
                 <td th:text="${report_info?.dob}">Birthday</td>
@@ -138,7 +138,7 @@
                 <td th:text="${report_info?.roomType}">R.Type</td>
                 <td th:text="${report_info?.arrivalDateFormat}">Arrival</td>
                 <td th:text="${report_info?.departureDateFormat}">Departure</td>
-                <td th:text="${report_info?.travelAgentProfile?.firstName}">Travel Agent</td>
+                <td th:text="${report_info?.travelAgentProfile}">Travel Agent</td>
                 <td th:text="${report_info?.status}">Status</td>
             </tr>
             </tbody>
