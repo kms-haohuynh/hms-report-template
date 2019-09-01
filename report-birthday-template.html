@@ -131,9 +131,6 @@
             <tr th:each="report_info: ${reportInfo}">
                 <td th:text="${report_infoStat.count}">1</td>
                 <td th:if="${report_info.firstName}" th:text="${report_info.firstName}">Guest</td>
-                <td th:if="${report_info.vipCode}"  th:text="${report_info.vipCode}">VIP</td>
-                <td th:if="${report_info.country}" th:text="${report_info.country}">Country</td>
-                <td th:if="${report_info.dob}" th:text="${report_info.dob}">Birthday</td>
             </tr>
             </tbody>
         </table>
