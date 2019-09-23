@@ -151,9 +151,7 @@
                     <td th:text="${report_info?.confirmationNumber}">Conf No</td>
                     <td th:text="${report_info?.cancellationNumber}">CXL No</td>
                     <td>
-                        <div th:each="guest_profile: ${report_info.guestProfiles}">
-                            <div th:text="${guest_profile.get('lastName')} != null ? ${guest_profile.get('lastName')} +', ' + ${guest_profile.get('firstName')}">FirstName</div>
-                        </div>
+                        Guest
                     </td>
                     <td th:text="${report_info.travelAgentProfileName != '' ? report_info.travelAgentProfileName : report_info.companyProfileName}">Agent</td>
                     <td th:text="${report_info?.roomType}">Room Type</td>
