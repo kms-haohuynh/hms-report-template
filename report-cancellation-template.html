@@ -145,26 +145,24 @@
             </tr>
             </thead>
             <tbody>
-            <div th:each="report_info: ${reportInfo}">
-                <tr>
-                    <td style="text-align: right;" th:text="${report_infoStat.count}">1</td>
-                    <td th:text="${report_info?.confirmationNumber}">Conf No</td>
-                    <td th:text="${report_info?.cancellationNumber}">CXL No</td>
-                    <td>
-                        <div th:each="guest_profile: ${report_info.guestProfiles}">
-                            <div th:text="${guest_profile.get('lastName')} != null ? ${guest_profile.get('lastName')} +', ' + ${guest_profile.get('firstName')}">FirstName</div>
-                        </div>
-                    </td>
-                    <td th:text="${report_info.travelAgentProfileName != '' ? report_info.travelAgentProfileName : report_info.companyProfileName}">Agent</td>
-                    <td th:text="${report_info?.roomType}">Room Type</td>
-                    <td th:text="${report_info?.arrivalDateFormat}">04-09-2019</td>
-                    <td th:text="${report_info?.departureDateFormat}">05-09-2019</td>
-                    <td th:text="${report_info?.reason}">reason</td>
-                    <td th:text="${report_info?.reference}">reference</td>
-                    <td th:text="${report_info?.cancelledAtFormat}">Canceled At</td>
-                    <td style="text-align: right;" th:text="${report_info?.total}">0</td>
-                </tr>
-            </div>
+            <tr th:each="report_info: ${reportInfo}">
+                <td style="text-align: right;" th:text="${report_infoStat.count}">1</td>
+                <td th:text="${report_info?.confirmationNumber}">Conf No</td>
+                <td th:text="${report_info?.cancellationNumber}">CXL No</td>
+                <td>
+                    <div th:each="guest_profile: ${report_info.guestProfiles}">
+                        <div th:text="${guest_profile.get('lastName')} != null ? ${guest_profile.get('lastName')} +', ' + ${guest_profile.get('firstName')}">FirstName</div>
+                    </div>
+                </td>
+                <td th:text="${report_info.travelAgentProfileName != '' ? report_info.travelAgentProfileName : report_info.companyProfileName}">Agent</td>
+                <td th:text="${report_info?.roomType}">Room Type</td>
+                <td th:text="${report_info?.arrivalDateFormat}">04-09-2019</td>
+                <td th:text="${report_info?.departureDateFormat}">05-09-2019</td>
+                <td th:text="${report_info?.reason}">reason</td>
+                <td th:text="${report_info?.reference}">reference</td>
+                <td th:text="${report_info?.cancelledAtFormat}">Canceled At</td>
+                <td style="text-align: right;" th:text="${report_info?.total}">0</td>
+            </tr>
             <tr>
                 <td colspan="11" style="text-align: right; font-weight: bold;">TOTAL</td>
                 <td style="text-align: right; font-weight: bold;" th:text="${reportSummary?.total}">0</td>
