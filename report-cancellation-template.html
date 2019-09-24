@@ -141,7 +141,7 @@
                 <th style="width: 30px">CXL Reason</th>
                 <th style="width: 70px">Reference</th>
                 <th style="width: 70px">Cancelled At</th>
-                <th style="text-align: right; width: 20px">Total Rate</th>
+                <th style="text-align: right; width: 40px">Total Rate</th>
             </tr>
             </thead>
             <tbody>
@@ -161,11 +161,11 @@
                 <td th:text="${report_info?.reason}">reason</td>
                 <td th:text="${report_info?.reference}">reference</td>
                 <td th:text="${report_info?.cancelledAtFormat}">Canceled At</td>
-                <td style="text-align: right;" th:text="${report_info?.totalFormat}">0</td>
+                <td style="text-align: right;" th:text="${report_info?.totalFormat}">2,250,000</td>
             </tr>
             <tr>
                 <td colspan="11" style="text-align: right; font-weight: bold;">TOTAL</td>
-                <td style="text-align: right; font-weight: bold;" th:text="${reportSummary?.totalFormat}">0</td>
+                <td style="text-align: right; font-weight: bold;" th:text="${reportSummary?.totalFormat}">2,250,000</td>
             </tr>
             </tbody>
         </table>
