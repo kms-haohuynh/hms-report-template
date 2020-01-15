@@ -62,9 +62,9 @@
         header .page-title {
             margin: auto;
             font-family: 'Playfair Display', serif;
-            color: #000000;
+            color: #3E4345;
             text-transform: uppercase;
-            font-size: 26px;
+            font-size: 2.5em;
             margin-bottom: -3px;
             margin-top: -32px;
             text-align: center;
@@ -99,14 +99,8 @@
         table {
             border-collapse: collapse;
             width: 100%;
-        }
-
-        table, td {
-            border: 0.1px solid #3E4345;
-        }
-
-        td {
-            border-bottom: none;
+            -fs-table-paginate: paginate;
+            page-break-inside: auto
         }
 
         th, td {
@@ -126,40 +120,53 @@
             word-wrap: break-word;
         }
 
-        th, tr:last-child td {
-            border: 0.1px solid #3E4345;
+        table tbody > tr:nth-child(odd) {
+            background-color:#eee;
         }
+        .page-title th {
+          text-align: left;
+          border-bottom: 1px solid #000;
+       }
+       tr {
+        page-break-inside: avoid;
+        page-break-after: auto
+       }
     </style>
 </head>
 <body>
 <div class="container">
     <header>
         <div class="logo">
-            <img th:src="${logo}"/>
-            <span class="logo-title" th:text="${propertyName}">PHU QUOC PARADISE RESORT &amp; VILLAS</span>
-        </div>
-        <div>
-            <h1 class="page-title">BIRTHDAY</h1>
+            <div>
+                <div style="display: inline-block; width: 33.33%;">
+                    <div>
+                        <img th:src="${logo}"/>
+                        <span class="logo-title" th:text="${propertyName}">PHU QUOC PARADISE RESORT &amp; VILLAS</span>
+                    </div>
+                </div>
+                <div style="display: inline-block; width: 33.33%;">
+                    <h1 class="page-title">BIRTHDAY</h1>
+                </div>
+            </div>
+            <div>
+                <div >
+                    <div class="filter-date" style="background-color: white; text-align: left; padding: 0px; border: none; display: inline;"
+                         th:text="'Filter: ' + ${fromDateFormat}
+      + ' - ' + ${toDateFormat}">
+                        Filter: 01/06/19 - 09/06/19
+                    </div>
+                    <div class="report-date" style="background-color: white; text-align: right; padding: 0px; border: none; float: right;"
+                         th:text="'Report Date: ' + ${reportDateFormat}">
+                        Report Date: 12:00 - 09/06/19
+                    </div>
+                </div>
+            </div>
         </div>
     </header>
     <main>
-        <table class="report-info" cellspacing="0" cellpadding="0" style="border: none; background-color: white;">
-            <tr>
-                <td class="filter-date" style="background-color: white; text-align: left; padding: 0px; border: none;"
-                    th:text="'Filter: ' + ${fromDateFormat}
-      + ' - ' + ${toDateFormat}">
-                    Filter: 01/06/19 - 09/06/19
-                </td>
-                <td class="report-date" style="background-color: white; text-align: right; padding: 0px; border: none;"
-                    th:text="'Report Date: ' + ${reportDateFormat}">
-                    Report Date: 12:00 - 09/06/19
-                </td>
-            </tr>
-        </table>
-
         <table>
             <thead>
-            <tr>
+            <tr class="page-title">
                 <th style="text-align: right; width: 20px">No.</th>
                 <th style="width: 120px">Guest</th>
                 <th style="width: 30px">VIP</th>
