@@ -54,9 +54,9 @@
         header .page-title {
             margin: auto;
             font-family: 'Playfair Display', serif;
-            color: #000000;
+            color: #3E4345;
             text-transform: uppercase;
-            font-size: 26px;
+            font-size: 2.5em;
             margin-bottom: -3px;
             margin-top: -32px;
             text-align: center;
@@ -83,22 +83,30 @@
             margin: 3.3em 0;
         }
         table {
-            border-collapse: separate;
+            border-collapse: collapse;
             width: 100%;
-            border: 0.1px solid black;
-        }
-        table, td {
-            border: 0.1px solid black;
+            -fs-table-paginate: paginate;
+            page-break-inside: auto
         }
         th, td {
             padding: 0.85em;
             font-style: normal;
             font-weight: normal;
-            border: 0.1px solid black;
         }
         th {
             text-align: left;
             font-weight: bold;
+        }
+        tr {
+        page-break-inside: avoid;
+        page-break-after: auto
+       }
+       .tabletitle th {
+          text-align: left;
+          border-bottom: 1px solid #000;
+       }
+       table tbody > tr:nth-child(odd) {
+            background-color:#eee;
         }
     </style>
 </head>
@@ -106,29 +114,34 @@
 <div class="container">
     <header>
         <div class="logo">
-            <div style="display: inline-block; width: 33.33%;">
-                <img th:src="${logo}"/>
-                <span class="logo-title" th:text="${propertyName}">PHU QUOC PARADISE RESORT &amp; VILLAS</span>
+            <div>
+                <div style="display: inline-block; width: 33.33%;">
+                    <div>
+                        <img th:src="${logo}"/>
+                        <span class="logo-title" th:text="${propertyName}">PHU QUOC PARADISE RESORT &amp; VILLAS</span>
+                    </div>
+                </div>
+                <div style="display: inline-block; width: 33.33%;">
+                    <h1 class="page-title">CANCELLATION LIST</h1>
+                </div>
             </div>
-            <div style="display: inline-block; width: 33.33%;">
-                <h1 class="page-title" th:text="${reportName}">CANCELLATION LIST</h1>
+            <div>
+                <div >
+                    <div class="filter-date" style="background-color: white; text-align: left; padding: 0px; border: none; display: inline;" th:text="'Filter: ' + ${fromDateFormat}
+      + ' - ' + ${toDateFormat}">
+                        Filter: 01/06/19 - 09/06/19
+                    </div>
+                    <div class="report-date" style="background-color: white;text-align: right;padding: 0px;border: none; float: right;" th:text="'Report Date: ' + ${reportDateFormat}">
+                        Report Date: 12:00 - 09/06/19
+                    </div>
+                </div>
             </div>
         </div>
     </header>
     <main>
-        <table class="report-info" cellspacing="0" cellpadding="0" style="border: none; background-color: white;"><tr>
-            <td class="filter-date" style="background-color: white; text-align: left; padding: 0px; border: none;" th:text="'Filter: ' + ${fromDateFormat}
-      + ' - ' + ${toDateFormat}">
-                Filter: 01/06/19 - 09/06/19
-            </td>
-            <td class="report-date" style="background-color: white;text-align: right;padding: 0px;border: none" th:text="'Report Date: ' + ${reportDateFormat}">
-                Report Date: 12:00 - 09/06/19
-            </td>
-        </tr></table>
-
         <table cellspacing="0" cellpadding="0">
             <thead>
-            <tr>
+            <tr class="tabletitle">
                 <th style="text-align: right; width: 20px">No.</th>
                 <th style="width: 80px">Conf. No.</th>
                 <th style="width: 60px">CXL. No.</th>
@@ -144,24 +157,26 @@
             </tr>
             </thead>
             <tbody>
-            <tr th:each="report_info: ${reportInfo}">
-                <td style="text-align: right;" th:text="${report_infoStat.count}">1</td>
-                <td th:text="${report_info?.confirmationNumber}">Conf No</td>
-                <td th:text="${report_info?.cancellationNumber}">CXL No</td>
-                <td>
-                    <div th:each="guest_profile: ${report_info.guestProfiles}">
-                        <div th:text="${guest_profile.get('lastName')} != null ? ${guest_profile.get('lastName')} +', ' + ${guest_profile.get('firstName')}">FirstName</div>
-                    </div>
-                </td>
-                <td th:text="${report_info.travelAgentProfileName != '' ? report_info.travelAgentProfileName : report_info.companyProfileName}">Agent</td>
-                <td th:text="${report_info?.roomType}">Room Type</td>
-                <td th:text="${report_info?.arrivalDateFormat}">04-09-2019</td>
-                <td th:text="${report_info?.departureDateFormat}">05-09-2019</td>
-                <td th:text="${report_info?.reason}">reason</td>
-                <td th:text="${report_info?.reference}">reference</td>
-                <td th:text="${report_info?.cancelledAtFormat}">13:54 24/09/2019 </td>
-                <td style="text-align: right;" th:text="${report_info?.totalFormat}">2,250,000</td>
-            </tr>
+            <div th:remove="tag" th:each="report_info: ${reportInfo}">
+                <tr>
+                    <td style="text-align: right;" th:text="${report_infoStat.count}">1</td>
+                    <td th:text="${report_info?.confirmationNumber}">Conf No</td>
+                    <td th:text="${report_info?.cancellationNumber}">CXL No</td>
+                    <td>
+                        <div th:each="guest_profile: ${report_info.guestProfiles}">
+                            <div th:text="${guest_profile.get('lastName')} != null ? ${guest_profile.get('lastName')} +', ' + ${guest_profile.get('firstName')}">FirstName</div>
+                        </div>
+                    </td>
+                    <td th:text="${report_info.travelAgentProfileName != '' ? report_info.travelAgentProfileName : report_info.companyProfileName}">Agent</td>
+                    <td th:text="${report_info?.roomType}">Room Type</td>
+                    <td th:text="${report_info?.arrivalDateFormat}">04-09-2019</td>
+                    <td th:text="${report_info?.departureDateFormat}">05-09-2019</td>
+                    <td th:text="${report_info?.reason}">reason</td>
+                    <td th:text="${report_info?.reference}" style="word-wrap: break-word;">reference</td>
+                    <td th:text="${report_info?.cancelledAtFormat}">13:54 24/09/2019 </td>
+                    <td style="text-align: right;" th:text="${report_info?.totalFormat}">2,250,000</td>
+                </tr>
+            </div>
             <tr>
                 <td colspan="11" style="text-align: right; font-weight: bold;">TOTAL</td>
                 <td style="text-align: right; font-weight: bold;" th:text="${reportSummary?.totalFormat}">2,250,000</td>
